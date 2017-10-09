@@ -13,9 +13,9 @@
 			<div class="container" style="text-align: center;">
 
 				<form method="post" action="editauthor">
-					${statusMessage} <br />Enter Author Name to Edit: <input
-						type="text" name="authorName" value="${authorName}" /> <br /> <input
-						type="hidden" name="authorId" value="${authorId}" /> <br /> <label
+					${statusMessage} <br />Enter Author Name to Edit: 
+					<input type="text" name="authorName" value="${authorName}" /> <br /> 
+					<input type="hidden" name="authorId" value="${authorId}" /> <br /> <label
 						for="sel1">Select Books from list Below: </label><br>
 					<br>
 					<div class="form-group"

@@ -12,7 +12,7 @@
     <div class="container">
         <div>
 <div class="container" style="text-align: center;margin-top: 45px;">
-	<h3>Add New Genre</h3> <br>
+	<h3>Add New Genre</h3> 
 	<form:form method="post" action="addgenre" modelAttribute="Genre">
 	${statusMessage}
 		<br/>Enter Genre Name: 
@@ -20,15 +20,15 @@
 		 <br/>
 		
 		<%-- Div class for select tag --%> 
-		<label for="sel1">Select Books from list Below: </label>
-		<div class="form-group" style="padding-left: 22%;">
+		<br><label for="sel1">Select Books from list Below: </label>
+		<div class="form-group" style="padding-left: 18%;">
 		
-		<form:select path="books"
-				class="form-group" multiple="multiple" size="10" style="width:75%;">
+		<select name="bookIds"
+				class="form-group" multiple="multiple" size="10" style="width:70%;">
 				<loop:forEach items="${books}" var="b" >                                
-		        <form:option value="${b.bookId}"> ${b.title} </form:option>
+		        <option value="${b.bookId}"> ${b.title} </option>
 		    </loop:forEach> 
-			</form:select>  
+			</select>  
 		 </div>
 		 
 		<br/>

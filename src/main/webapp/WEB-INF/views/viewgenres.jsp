@@ -56,16 +56,16 @@ ${statusMessage}
 		<td>${g.genreName} </td>
         <td>
 				<ul style="padding-right: 50%; list-style-type: none;">
-					<loop:forEach var="b" items="${a.books}">
+					<loop:forEach var="b" items="${g.books}">
 					<li>${b.title}</li>
 					</loop:forEach>
 				</ul>
 		</td>
         <td><button type="button"
-					onclick="javascript:location.href='editgenre?genreId=${a.genreId}'"
+					onclick="javascript:location.href='editgenre?genreId=${g.genreId}'"
 					class="btn btn-primary btn-sm">Edit</button></td>
 			<td><button type="button"
-					onclick="javascript:location.href='deleteGenre?genreId=${a.genreId}'"
+					onclick="javascript:location.href='deleteGenre?genreId=${g.genreId}'"
 					class="btn btn-danger btn-sm">Delete</button></td>
 		</tr>
 	</loop:forEach>

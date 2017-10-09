@@ -194,7 +194,9 @@ import com.gcit.lms.entity.LibraryBranch;
 			return genres;
 			} 
 		public Genre readGenreByPK(Integer genreId) throws SQLException{
-			return gdao.readGenreByPK(genreId);
+			Genre genre= gdao.readGenreByPK(genreId);
+			genre.setBooks(bdao.readAllBooksByGenre(genre));
+			return genre;
 		} 
 		public Integer getGenresCount() throws SQLException{
 			return gdao.getGenresCount();
