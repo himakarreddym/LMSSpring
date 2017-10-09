@@ -13,47 +13,47 @@
 
 <div class="container" style="text-align: center; margin-top: 45px;">
 	<h3>Add New Book</h3>
-	<form method="post" action="addBook">
-		${statusMessage} <br />Enter Book Title: <input type="text"
-			name="bookName"><br />
+	<form:form method="post" action="addBook" modelAttribute="Book">
+		${statusMessage} <br />Enter Book Title: <form:input type="text"
+			path="title" /><br />
 		<br />
 		<br /> <br />
 		<%-- Div class for select tag --%>
 		<div class="form-group" align="center"
 			style="width: 30%; float: left; padding-right: 30px;">
 			<label for="sel1">Select Publisher from list Below: </label>
-			<form:select class="form-group" id="sel1" path="publishers">
+			<select class="form-group" id="sel1" name="publisherId">
 				<loop:forEach items="${publishers}" var="pub">
-					<form:option value="${pub.publisherId}">${pub.publisherName} </form:option>
+					<option value="${pub.publisherId}">${pub.publisherName} </option>
 				</loop:forEach>
-			</form:select>
+			</select>
 		</div>
 
 		<div class="form-group" align="center"
 			style="width: 35%; float: left; padding-right: 30px;">
 			<label for="sel1">Select Authors from list Below: </label>
-			<form:select class="form-group" path="authors" multiple="multiple"
+			<select class="form-group" name="authorIds" multiple="multiple"
 				size="10">
 				<loop:forEach items="${authors}" var="a">
-					<form:option value="${a.authorId}"> ${a.authorName} </form:option>
+					<option value="${a.authorId}"> ${a.authorName} </option>
 				</loop:forEach>
-			</form:select>
+			</select>
 		</div>
 
 
 		<div class="form-group" align="center"
 			style="width: 35%; float: left; padding-right: 10px;">
 			<label for="sel1">Select Genre from list Below: </label>
-			<form:select class="form-group" path="genres" multiple="multiple"
+			<select class="form-group" name="genreIds" multiple="multiple"
 				size="10">
 				<loop:forEach items="${genres}" var="g">
-					<form:option value="${g.genreId}"> ${g.genreName} </form:option>
+					<option value="${g.genreId}"> ${g.genreName} </option>
 				</loop:forEach>
-			</form:select>
+			</select>
 		</div>
 		<div style="text-align: center">
 			<button type="submit" class="btn btn-primary btn-md">Save
 				Book</button>
 		</div>
-	</form>
+	</form:form>
 </div>

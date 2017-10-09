@@ -2,10 +2,8 @@ package com.gcit.lms;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,7 +126,7 @@ public class AuthorController {
 	
 	
 	@RequestMapping(value = "/editauthor", method = RequestMethod.GET)
-	 public ModelAndView GoToeditAuthor(Model model,@RequestParam(value ="authorId",required=false) Integer authorId) {
+	 public String GoToeditAuthor(Model model,@RequestParam(value ="authorId",required=false) Integer authorId) {
 	Author author = new Author();
 	try {
 		author = adminService.readAuthorByPK(authorId);
@@ -140,7 +138,8 @@ public class AuthorController {
 				availablebooks.add(book);
 			}
 		}
-		model.addAttribute("Author",author);
+		model.addAttribute("authorId",authorId);
+		model.addAttribute("authorName",author.getAuthorName());
 		model.addAttribute("books",availablebooks);
 		
 		model.addAttribute("authorBooks",author.getBooks());
@@ -149,7 +148,51 @@ public class AuthorController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	        return new ModelAndView("editauthor", "Author", author);
+	        return "editauthor";
 	    }
-	
+	@RequestMapping(value = "/editauthor", method = RequestMethod.POST)
+	 public String GoToAuthorPost(@ModelAttribute("Author")Author author,
+				@RequestParam(value ="bookIds",required=false) String[] bookIds,BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			logger.info("error",result.getFieldError());
+        }
+		if(bookIds != null) {
+			try {
+				author.setBooks(adminService.getBooks(bookIds));
+				adminService.saveAuthor(author);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		model.clear();
+		return "redirect:/viewauthors";
+	}
+	@RequestMapping(value = "/deleteAuthor", method = RequestMethod.GET)
+	 public String deleteAuthor(Model model,@RequestParam(value ="authorId",required=false) Integer authorId ) {
+		Author author = new Author();
+		author.setAuthorId(authorId);
+		try {
+			adminService.deleteAuthor(author);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:viewauthors";
+	    }
+	@RequestMapping(value = "/deleteAuthorBook", method = RequestMethod.GET)
+	 public String deleteBorrower(Model model,@RequestParam(value ="authorId",required=false) Integer authorId,
+			 @RequestParam(value ="bookId",required=false) Integer bookId ) {
+		Author author = new Author();
+		author.setAuthorId(authorId);
+		try {
+			adminService.deleteBookAuthor(author,bookId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("authorId",authorId);
+		return "redirect:editauthor";
+	    }
 }

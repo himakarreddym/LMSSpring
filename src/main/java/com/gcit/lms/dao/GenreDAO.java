@@ -56,11 +56,9 @@ public class GenreDAO extends BaseDAO implements ResultSetExtractor<List<Genre>>
 		if(genrename !=null && !genrename.isEmpty()){
 			genrename = "%"+genrename+"%";
 			sql="SELECT * FROM tbl_genre WHERE genre_name like ?";
-			sql+=pagenation();
 			return template.query(sql, new Object[]{genrename},this);
 		}else{
-			sql="SELECT * FROM tbl_genre";
-			sql+=pagenation();		
+			sql="SELECT * FROM tbl_genre";		
 			return template.query(sql,this);
 		}
 		
