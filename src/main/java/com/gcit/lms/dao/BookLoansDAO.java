@@ -47,7 +47,10 @@ public class BookLoansDAO extends BaseDAO implements ResultSetExtractor<List<Boo
 	
 	public List<BookLoans> readBookLoansPage(Integer pageNo) throws SQLException {
 		setPageNo(pageNo);
-			return template.query("SELECT * FROM tbl_book_loans WHERE dateIn is null",this);
+		String sql = null;
+		sql="SELECT * FROM tbl_book_loans WHERE dateIn is null";
+		sql+=pagenation();
+			return template.query(sql,this);
 		
 	}
 	
@@ -95,6 +98,12 @@ public class BookLoansDAO extends BaseDAO implements ResultSetExtractor<List<Boo
 		
 		return bookloanss;
 	}
-	
+	public String pagenation() {
+	if(getPageNo()!=null){
+		Integer index = (getPageNo() -1) * getPageSize();
+		return " LIMIT "+index+","+getPageSize();
+	}
+	return null;
+	}
 
 }

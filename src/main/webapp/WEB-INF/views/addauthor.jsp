@@ -1,12 +1,11 @@
 <%@ taglib prefix="loop" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="boot.htm" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.gcit.lms.entity.Book"%>
 <%@page import="java.util.List"%>
 <%@page import="com.gcit.lms.service.AdminService"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
  <div class="jumbotron jumbotron-billboard">
   <div class="img"></div>
     <div class="container">

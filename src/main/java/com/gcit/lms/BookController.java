@@ -125,7 +125,6 @@ public class BookController {
 				}
 			}
 			List<Publisher> publishers = adminService.readPublishers();
-			List<Publisher> availablepublishers = new ArrayList<Publisher>();
 			Publisher bookPublisher = book.getPublisher();
 			List<Genre> genres = adminService.readGenres();
 			List<Genre> bookGenres = book.getGenres();
@@ -135,18 +134,14 @@ public class BookController {
 					availableGenres.add(g);
 				}
 			}
-			for (Publisher p : publishers) {
-				if (p.getPublisherId() == bookPublisher.getPublisherId()) {
-					availablepublishers.add(p);
-				}
-			}
+			logger.info("Publishers"+publishers.size());
 
 			model.addAttribute("authorBooks", authorBooks);
 			model.addAttribute("bookGenres", bookGenres);
 			model.addAttribute("authors", availableAuthors);
 			model.addAttribute("genres", availableGenres);
 			model.addAttribute("book", book);
-			model.addAttribute("publishers", availablepublishers);
+			model.addAttribute("publishers", publishers);
 			model.addAttribute("bookPublisher", bookPublisher);
 
 		} catch (SQLException e) {
